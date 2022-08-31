@@ -5,26 +5,55 @@
 //5 9 2 3
 //8 4 2 4
 //Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
-Random random = new Random();
-int[,] arr = new int[random.Next(1, 10), random.Next(1, 10)];
-for (int i = 0; i < arr.GetLength(0); i++)
+Console.Write("Введите число срок:  ");
+int rows = Convert.ToInt32(Console.ReadLine());
+
+Console.Write("Введите число столбиков:  ");
+int columns = Convert.ToInt32(Console.ReadLine());
+
+int[,]GetArray (int m, int n)
 {
-    for (int j = 0; j < arr.GetLength(1); j++)
+    int[,] matrix = new int[m, n];
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        arr[i, j] = random.Next(1, 10);
-        Console.Write(arr[i, j] + " ");
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            matrix[i,j] = new Random().Next(10);
+        }
     }
-    Console.WriteLine();
+    return matrix;
 }
-Console.WriteLine("---------------------------");
-Console.WriteLine(arr.GetLength(0));
-for (int j = 0; j < arr.GetLength(1); j++)
+
+ int[,] result = GetArray(rows, columns);
+ void PrintArray (int[,]inputMatrix)
+ {
+    for (int i = 0; i < inputMatrix.GetLength(0); i++)
+    {
+      for (int m = 0; m < inputMatrix.GetLength(1); m++)
+      {
+        Console.Write(inputMatrix[i,m] + "\t"); // \t - Tab    
+      }
+      Console.WriteLine();
+    }
+ }
+PrintArray (result);
+Console.WriteLine();
+
+void AverageOfColumns(int[,] array)
 {
-    double sum = 0;
-    for (int i = 0; i < arr.GetLength(0); i++)
+   
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        sum += arr[i, j];
+        double sum = 0;
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            sum = sum + array[i, j];
+        }
+        Console.Write($"{sum / array.GetLength(0)}  "); 
     }
-    Console.Write($"{ sum / arr.GetLength(0)} ");
 }
+AverageOfColumns(result);
 Console.ReadLine();
+
+
+
